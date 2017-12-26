@@ -24,6 +24,9 @@ public class AuthRequest {
     private static String Email;
     private static String Password;
 
+    private static DatabaseReference databaseReference;
+    private static ValueEventListener eventListener;
+
     public static AuthRequest Field(String username, String email, String password) {
         Username = username;
         Email = email;
@@ -81,27 +84,8 @@ public class AuthRequest {
 
                             final String UserID = task.getResult().getUser().getUid();
 
-                            DatabaseReference ref = MyApplication.getFirebaseDatabaseReferences("user").child(UserID);
-                            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    ModelUser user = dataSnapshot.getValue(ModelUser.class);
-
-                                    if (user != null) {
-                                        user.setLoginTime(Constan.getTime());
-                                        MyApplication.getFirebaseDatabaseReferences("user").child(UserID).setValue(user);
-                                    }
-                                    PreferencesManager.initPreferences().setUserInfo(user);
-
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-
-                            listener.onAuthSuccess();
+                            databaseReference = MyApplication.getFirebaseDatabaseReferences("user").child(UserID);
+                            databaseReference.addListenerForSingleValueEvent(eventListener(listener , UserID));
 
                         } else {
                             listener.onAuthFailed(task.getException().getMessage());
@@ -109,6 +93,37 @@ public class AuthRequest {
 
                     }
                 });
-
     }
+
+    private ValueEventListener eventListener(final onAuthRequestListener listener, final String UserID) {
+        eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ModelUser user = dataSnapshot.getValue(ModelUser.class);
+
+                if (user != null) {
+                    user.setLoginTime(Constan.getTime());
+                    MyApplication.getFirebaseDatabaseReferences("user").child(UserID).setValue(user);
+                    PreferencesManager.initPreferences().setUserInfo(user);
+
+                    listener.onAuthSuccess();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        return eventListener;
+    }
+
+    public static void removeSignInListener(){
+        databaseReference.removeEventListener(eventListener);
+    }
+
+
 }

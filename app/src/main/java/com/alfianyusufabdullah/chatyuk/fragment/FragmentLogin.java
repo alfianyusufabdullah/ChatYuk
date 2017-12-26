@@ -152,4 +152,11 @@ public class FragmentLogin extends Fragment {
     private void showSnacbar(String Pesan) {
         Snackbar.make(rootView, Pesan, Snackbar.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        AuthRequest.removeSignInListener();
+    }
 }

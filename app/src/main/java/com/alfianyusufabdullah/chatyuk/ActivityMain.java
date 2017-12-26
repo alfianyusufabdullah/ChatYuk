@@ -18,9 +18,11 @@ import android.widget.TextView;
 
 import com.alfianyusufabdullah.chatyuk.adapter.AdapterChat;
 import com.alfianyusufabdullah.chatyuk.model.ModelChat;
+import com.alfianyusufabdullah.chatyuk.model.ModelUser;
 import com.alfianyusufabdullah.chatyuk.network.ChatRequest;
 import com.alfianyusufabdullah.chatyuk.utils.Constan;
 import com.alfianyusufabdullah.chatyuk.utils.EditTextListener;
+import com.alfianyusufabdullah.chatyuk.utils.PreferencesManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -113,10 +115,10 @@ public class ActivityMain extends AppCompatActivity {
         chatItem.setLayoutManager(new LinearLayoutManager(this));
         chatItem.setAdapter(adapterChat);
 
-        SharedPreferences preferences = MyApplication.getInstance().getSharedPreferences();
+        ModelUser user = PreferencesManager.initPreferences().getUserInfo();
 
-        navUser.setText(preferences.getString(Constan.PREF_USERNAME, "User"));
-        navEmail.setText(preferences.getString(Constan.PREF_EMAIL, "Email"));
+        navUser.setText(user.getUsername());
+        navEmail.setText(user.getEmail());
 
         toolbar.setTitle("Chat Yuk!");
 
