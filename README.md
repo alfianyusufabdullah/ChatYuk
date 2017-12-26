@@ -1,5 +1,7 @@
 # ChatYuk
 
+Simple Android App Chat Using Firebase :books: :books:
+
 ## TODO
 
 * use your own **google-service.json**
