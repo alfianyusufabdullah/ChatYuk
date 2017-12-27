@@ -85,7 +85,7 @@ public class AuthRequest {
                             final String UserID = task.getResult().getUser().getUid();
 
                             databaseReference = MyApplication.getFirebaseDatabaseReferences("user").child(UserID);
-                            databaseReference.addListenerForSingleValueEvent(eventListener(listener , UserID));
+                            databaseReference.addListenerForSingleValueEvent(eventListener(listener, UserID));
 
                         } else {
                             listener.onAuthFailed(task.getException().getMessage());
@@ -121,9 +121,9 @@ public class AuthRequest {
         return eventListener;
     }
 
-    public static void removeSignInListener(){
-        databaseReference.removeEventListener(eventListener);
+    public static void removeSignInListener() {
+        if (eventListener != null) {
+            databaseReference.removeEventListener(eventListener);
+        }
     }
-
-
 }
