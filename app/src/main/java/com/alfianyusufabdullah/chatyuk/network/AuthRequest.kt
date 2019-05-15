@@ -46,7 +46,7 @@ class AuthRequest {
                         this?.let {
                             it.loginTime = Constant.time
                             MyApplication.getFirebaseDatabaseReferences("user").child(userId).setValue(it)
-                            listener.onAuthSuccess()
+                            listener.onAuthSuccess(it)
                         }
                     }
                 }
@@ -57,8 +57,8 @@ class AuthRequest {
     }
 
     fun doRegister(listener: AuthRequestListener) {
-        Log.d("TAG" , email)
-        Log.d("TAG" , password)
+        Log.d("EMAIL", email )
+        Log.d("PASSWORD", password)
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
 
@@ -75,7 +75,7 @@ class AuthRequest {
                                 .child(userId ?: "0")
                                 .setValue(user)
 
-                        listener.onAuthSuccess()
+                        listener.onAuthSuccess(user)
                     } else {
                         listener.onAuthFailed(it.exception?.localizedMessage ?: "error")
                         Log.d("RegisterRequest", "onFailed: " + it.exception?.localizedMessage)

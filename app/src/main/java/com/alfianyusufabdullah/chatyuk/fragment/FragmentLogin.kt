@@ -11,6 +11,7 @@ import com.alfianyusufabdullah.chatyuk.MyApplication
 import com.alfianyusufabdullah.chatyuk.R
 import com.alfianyusufabdullah.chatyuk.interfaces.AuthRequestListener
 import com.alfianyusufabdullah.chatyuk.interfaces.AuthPageListener
+import com.alfianyusufabdullah.chatyuk.model.ModelUser
 import com.alfianyusufabdullah.chatyuk.network.AuthRequest
 import com.alfianyusufabdullah.chatyuk.utils.Constant
 import com.alfianyusufabdullah.chatyuk.utils.InputTextListener
@@ -61,7 +62,7 @@ class FragmentLogin : Fragment() {
             it.isEnabled = false
             setInputTextEnabled(false)
 
-            AuthRequest.field(email, password)
+            AuthRequest.field(email = email, password = password)
                     .doLogin(object : AuthRequestListener {
                         override fun onAuthFailed(error: String) {
 
@@ -83,8 +84,8 @@ class FragmentLogin : Fragment() {
 
                         }
 
-                        override fun onAuthSuccess() {
-                            registerPage.onAuthenticateSuccess()
+                        override fun onAuthSuccess(user: ModelUser) {
+                            registerPage.onAuthenticateSuccess(user)
                         }
 
                     })
@@ -109,8 +110,8 @@ class FragmentLogin : Fragment() {
         }
     }
 
-    private fun showSnackbar(Pesan: String) {
-        Snackbar.make(rootView, Pesan, Snackbar.LENGTH_SHORT).show()
+    private fun showSnackbar(message: String) {
+        Snackbar.make(rootView, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

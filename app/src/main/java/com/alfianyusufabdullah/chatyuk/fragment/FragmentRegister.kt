@@ -11,6 +11,7 @@ import com.alfianyusufabdullah.chatyuk.MyApplication
 import com.alfianyusufabdullah.chatyuk.R
 import com.alfianyusufabdullah.chatyuk.interfaces.AuthRequestListener
 import com.alfianyusufabdullah.chatyuk.interfaces.AuthPageListener
+import com.alfianyusufabdullah.chatyuk.model.ModelUser
 import com.alfianyusufabdullah.chatyuk.network.AuthRequest
 import com.alfianyusufabdullah.chatyuk.utils.Constant
 import com.alfianyusufabdullah.chatyuk.utils.InputTextListener
@@ -89,7 +90,7 @@ class FragmentRegister : Fragment() {
             it.isEnabled = false
             setInputTextEnabled(false)
 
-            AuthRequest.field(username, email, confirmPassword)
+            AuthRequest.field(username = username, email = email, password = confirmPassword)
                     .doRegister(object : AuthRequestListener {
                         override fun onAuthFailed(error: String) {
 
@@ -104,8 +105,8 @@ class FragmentRegister : Fragment() {
                             }
                         }
 
-                        override fun onAuthSuccess() {
-                            loginpage.onAuthenticateSuccess()
+                        override fun onAuthSuccess(user: ModelUser) {
+                            loginpage.onAuthenticateSuccess(user)
                         }
                     })
         }
