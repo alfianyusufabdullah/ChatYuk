@@ -1,8 +1,6 @@
 package com.alfianyusufabdullah.chatyuk.utils
 
-import android.annotation.SuppressLint
 import android.util.Patterns
-
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,11 +12,6 @@ import java.util.*
  */
 
 object Constant {
-
-    const val CONS_USERNAME = 0
-    const val CONS_EMAIL = 1
-    const val CONS_PASS = 2
-    const val CONS_CONFIRM_PASS = 3
 
     const val PREF_USERNAME = "user"
     const val PREF_USER_ID = "id"
