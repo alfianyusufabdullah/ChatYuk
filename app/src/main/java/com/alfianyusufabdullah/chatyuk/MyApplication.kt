@@ -2,10 +2,8 @@ package com.alfianyusufabdullah.chatyuk
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
