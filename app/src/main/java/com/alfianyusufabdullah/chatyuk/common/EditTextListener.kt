@@ -1,4 +1,4 @@
-package com.alfianyusufabdullah.chatyuk.utils
+package com.alfianyusufabdullah.chatyuk.common
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,7 +23,7 @@ class EditTextListener(private val btn: Button) : TextWatcher {
     override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
         TransitionManager.beginDelayedTransition(btn.rootView as ViewGroup)
         if (charSequence.isEmpty()) {
-            btn.visibility = View.GONE
+            btn.visibility = View.INVISIBLE
         } else {
             btn.visibility = View.VISIBLE
         }

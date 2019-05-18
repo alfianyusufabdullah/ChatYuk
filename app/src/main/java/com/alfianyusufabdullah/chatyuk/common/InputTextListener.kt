@@ -1,4 +1,4 @@
-package com.alfianyusufabdullah.chatyuk.utils
+package com.alfianyusufabdullah.chatyuk.common
 
 import com.google.android.material.textfield.TextInputLayout
 import android.text.Editable
