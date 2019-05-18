@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
  * @github @alfianyusufabdullah
  */
 
-class MyApplication : Application() {
+class ChatApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -29,10 +29,5 @@ class MyApplication : Application() {
             val im = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             im.hideSoftInputFromWindow(editText.windowToken, InputMethodManager.RESULT_UNCHANGED_SHOWN)
         }
-
-        fun getFirebaseDatabaseReferences(Reference: String): DatabaseReference {
-            return database.getReference(Reference)
-        }
     }
-
 }
