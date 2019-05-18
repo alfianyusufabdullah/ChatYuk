@@ -1,9 +1,9 @@
 package com.alfianyusufabdullah.chatyuk.presentation.authentication.register
 
-import com.alfianyusufabdullah.chatyuk.common.Constant
 import com.alfianyusufabdullah.chatyuk.data.entity.User
 import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepository
 import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepositoryCallback
+import com.alfianyusufabdullah.chatyuk.isEmailValid
 
 class RegisterPresenter(private val authenticationRepository: AuthenticationRepository) {
 
@@ -28,7 +28,7 @@ class RegisterPresenter(private val authenticationRepository: AuthenticationRepo
             return
         }
 
-        if (!Constant.isEmailValid(user.email as String)) {
+        if (user.email?.isEmailValid() == false) {
             view?.onEmailInvalid()
             return
         }
