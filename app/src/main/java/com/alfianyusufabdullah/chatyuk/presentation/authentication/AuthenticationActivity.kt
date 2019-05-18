@@ -1,16 +1,15 @@
 package com.alfianyusufabdullah.chatyuk.presentation.authentication
 
 import android.content.Intent
-import androidx.fragment.app.FragmentTransaction
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.alfianyusufabdullah.chatyuk.presentation.chatroom.ChatRoomActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.alfianyusufabdullah.chatyuk.R
-
-import com.alfianyusufabdullah.chatyuk.presentation.authentication.login.LoginFragment
-import com.alfianyusufabdullah.chatyuk.presentation.authentication.register.RegisterFragment
 import com.alfianyusufabdullah.chatyuk.data.entity.User
 import com.alfianyusufabdullah.chatyuk.preferences.ChatPreferences
+import com.alfianyusufabdullah.chatyuk.presentation.authentication.login.LoginFragment
+import com.alfianyusufabdullah.chatyuk.presentation.authentication.register.RegisterFragment
+import com.alfianyusufabdullah.chatyuk.presentation.chatroom.ChatRoomActivity
+import com.alfianyusufabdullah.chatyuk.replaceFragment
 
 class AuthenticationActivity : AppCompatActivity(), AuthenticationPageListener {
 
@@ -19,28 +18,13 @@ class AuthenticationActivity : AppCompatActivity(), AuthenticationPageListener {
         setContentView(R.layout.activity_auth)
 
         if (savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.containerAuth, LoginFragment())
-                    .commit()
+            replaceFragment(R.id.containerAuth, LoginFragment())
         }
     }
 
-    override fun onLoginPage() {
-        supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.containerAuth, LoginFragment())
-                .commit()
-    }
+    override fun onLoginPage() = replaceFragment(R.id.containerAuth, LoginFragment())
 
-    override fun onRegisterPage() {
-        supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.containerAuth, RegisterFragment())
-                .commit()
-    }
+    override fun onRegisterPage() = replaceFragment(R.id.containerAuth, RegisterFragment())
 
     override fun onAuthenticateSuccess(user: User) {
         ChatPreferences.initPreferences(this).userInfo = user

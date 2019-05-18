@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.alfianyusufabdullah.chatyuk.ChatApplication
 import com.alfianyusufabdullah.chatyuk.R
+import com.alfianyusufabdullah.chatyuk.common.InputTextListener
 import com.alfianyusufabdullah.chatyuk.data.entity.User
 import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepository
 import com.alfianyusufabdullah.chatyuk.data.repository.database.MessageRepository
-import com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationActivity
-import com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationPageListener
-import com.alfianyusufabdullah.chatyuk.common.InputTextListener
 import com.alfianyusufabdullah.chatyuk.data.route.ChatReferences
+import com.alfianyusufabdullah.chatyuk.hideSoftInput
+import com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationPageListener
+import com.alfianyusufabdullah.chatyuk.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -100,7 +100,8 @@ class RegisterFragment : Fragment(), RegisterView {
     }
 
     override fun onRegisterStart() {
-        ChatApplication.hideSoftInput(context as AuthenticationActivity, regisUser)
+        context?.hideSoftInput(regisEmail)
+
         btnSignUp.isEnabled = false
         setInputTextEnabled(false)
     }
@@ -110,7 +111,8 @@ class RegisterFragment : Fragment(), RegisterView {
     }
 
     override fun onRegisterFailed(error: String?) {
-        showSnackbar(error)
+        rootView.showSnackbar(error)
+
         btnSignUp.isEnabled = true
         setInputTextEnabled(true)
     }
@@ -127,9 +129,5 @@ class RegisterFragment : Fragment(), RegisterView {
     override fun onDetach() {
         super.onDetach()
         registerPresenter.detachView()
-    }
-
-    private fun showSnackbar(message: String?) {
-        Snackbar.make(rootView, message ?: "empty", Snackbar.LENGTH_SHORT).show()
     }
 }
