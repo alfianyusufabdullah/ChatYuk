@@ -1,9 +1,10 @@
-package com.alfianyusufabdullah.chatyuk.utils
+package com.alfianyusufabdullah.chatyuk.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
 
-import com.alfianyusufabdullah.chatyuk.model.ModelUser
+import com.alfianyusufabdullah.chatyuk.data.entity.User
+import com.alfianyusufabdullah.chatyuk.common.Constant
 
 /**
  * Created by JonesRandom on 9/15/17.
@@ -14,9 +15,9 @@ import com.alfianyusufabdullah.chatyuk.model.ModelUser
 
 class ChatPreferences {
 
-    var userInfo: ModelUser
+    var userInfo: User
         get() {
-            val user = ModelUser()
+            val user = User()
             user.username = preferences.getString(Constant.PREF_USERNAME, "")
             user.email = preferences.getString(Constant.PREF_EMAIL, "")
             user.userId = preferences.getString(Constant.PREF_USER_ID, "")
