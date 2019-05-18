@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.alfianyusufabdullah.chatyuk.ActivityAuth">
+    tools:context="com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationActivity">
 
     <FrameLayout
         android:id="@+id/containerAuth"
