@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.alfianyusufabdullah.chatyuk.ActivityMain">
+    tools:context="com.alfianyusufabdullah.chatyuk.presentation.chatroom.ChatRoomActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,49 +24,55 @@
             app:contentInsetStartWithNavigation="0dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chatItem"
+            android:id="@+id/chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingTop="10dp"
-            android:paddingBottom="30dp" />
+            android:paddingBottom="10dp" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/chatText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#28000000"
-        android:orientation="horizontal">
+        android:background="#28000000">
 
-        <EditText
-            android:id="@+id/etMessage"
-            android:layout_width="0dp"
-            android:layout_margin="10dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="10dp"
             android:background="@drawable/editext_bg_chat"
-            android:hint="Message"
-            android:inputType="textNoSuggestions|textMultiLine"
-            android:maxLines="3"
-            android:minLines="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="8dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="8dp"
-            android:textSize="15sp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/ic_send_black_24dp"
-            android:visibility="gone" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:hint="Message"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:maxLines="3"
+                android:minLines="1"
+                android:paddingLeft="15dp"
+                android:paddingTop="8dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="8dp"
+                android:textSize="15sp" />
 
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/ic_send_black_24dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </FrameLayout>
 
 </RelativeLayout>
