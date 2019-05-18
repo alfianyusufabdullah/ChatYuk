@@ -1,0 +1,5 @@
+package com.alfianyusufabdullah.chatyuk.presentation.chatroom
+
+import com.alfianyusufabdullah.chatyuk.data.repository.database.MessageRepositoryCallback
+
+interface ChatRoomView : MessageRepositoryCallback
