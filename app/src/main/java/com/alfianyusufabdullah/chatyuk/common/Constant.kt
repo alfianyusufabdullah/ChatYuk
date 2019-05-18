@@ -20,8 +20,4 @@ object Constant {
 
     val time: String
         get() = SimpleDateFormat("dd MMM yyyy , HH.mm", Locale.getDefault()).format(Date())
-
-    fun isEmailValid(Email: String): Boolean {
-        return Email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(Email).matches()
-    }
 }

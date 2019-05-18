@@ -18,16 +18,7 @@ class ChatApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        database = FirebaseDatabase.getInstance()
+        val database = FirebaseDatabase.getInstance()
         database.setPersistenceEnabled(true)
-    }
-
-    companion object {
-        private lateinit var database: FirebaseDatabase
-
-        fun hideSoftInput(context: Context, editText: EditText) {
-            val im = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            im.hideSoftInputFromWindow(editText.windowToken, InputMethodManager.RESULT_UNCHANGED_SHOWN)
-        }
     }
 }
