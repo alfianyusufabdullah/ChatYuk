@@ -1,14 +1,14 @@
-package com.alfianyusufabdullah.chatyuk.adapter
+package com.alfianyusufabdullah.chatyuk.presentation.chatroom.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.alfianyusufabdullah.chatyuk.model.ModelChat
+import com.alfianyusufabdullah.chatyuk.data.entity.Chat
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.from_chat.*
+import kotlinx.android.synthetic.main.from_message.*
 
-class HolderFromChat(override val containerView: View?) : RecyclerView.ViewHolder(containerView as View), LayoutContainer {
+class HolderMesageFrom(override val containerView: View?) : RecyclerView.ViewHolder(containerView as View), LayoutContainer {
 
-    fun bindChatContent(chat: ModelChat) {
+    fun bindChatContent(chat: Chat) {
         if (chat.isSameUser == true) {
             fromUsernameGroup.visibility = View.GONE
         } else {
