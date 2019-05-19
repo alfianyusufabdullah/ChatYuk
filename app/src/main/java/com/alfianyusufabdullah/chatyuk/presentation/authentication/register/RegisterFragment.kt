@@ -18,13 +18,12 @@ import com.alfianyusufabdullah.chatyuk.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_register.*
+import org.koin.android.ext.android.inject
 
 class RegisterFragment : Fragment(), RegisterView {
 
     private lateinit var pageListener: AuthenticationPageListener
-    private lateinit var messageRepository: MessageRepository
-    private lateinit var authenticationRepository: AuthenticationRepository
-    private lateinit var registerPresenter: RegisterPresenter
+    private val registerPresenter by inject<RegisterPresenter>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,10 +33,6 @@ class RegisterFragment : Fragment(), RegisterView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        messageRepository = MessageRepository(ChatReferences())
-        authenticationRepository = AuthenticationRepository(FirebaseAuth.getInstance(), ChatReferences())
-
-        registerPresenter = RegisterPresenter(authenticationRepository)
         registerPresenter.attachView(this)
 
         regisUser.addTextChangedListener(InputTextListener(inputUsername))

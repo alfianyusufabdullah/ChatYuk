@@ -18,12 +18,13 @@ import com.alfianyusufabdullah.chatyuk.data.repository.database.MessageRepositor
 import com.alfianyusufabdullah.chatyuk.data.route.ChatReferences
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_chat_room.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class ChatRoomActivity : AppCompatActivity(), ChatRoomView {
 
     private lateinit var adapterMessage: AdapterMessage
-    private lateinit var chatRoomPresenter: ChatRoomPresenter
+    private val chatRoomPresenter by inject<ChatRoomPresenter>()
     private var listChat: MutableList<Chat> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,14 +60,13 @@ class ChatRoomActivity : AppCompatActivity(), ChatRoomView {
             etMessage?.setText("")
         }
 
-        chatRoomPresenter = ChatRoomPresenter(MessageRepository(ChatReferences()))
         chatRoomPresenter.attachView(this)
         chatRoomPresenter.getMessages()
     }
 
     override fun onMessageComing(chat: Chat) {
         listChat.add(chat)
-        adapterMessage.notifyDataSetChanged()
+        adapterMessage.notifyItemInserted(listChat.lastIndex)
     }
 
     override fun onMessageUpdate(position: Int, chat: Chat) {

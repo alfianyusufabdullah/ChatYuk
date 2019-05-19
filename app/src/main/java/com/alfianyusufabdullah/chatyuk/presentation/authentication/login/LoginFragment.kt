@@ -17,13 +17,12 @@ import com.alfianyusufabdullah.chatyuk.presentation.authentication.Authenticatio
 import com.alfianyusufabdullah.chatyuk.showSnackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment(), LoginView {
 
     private lateinit var pageListener: AuthenticationPageListener
-    private lateinit var messageRepository: MessageRepository
-    private lateinit var authenticationRepository: AuthenticationRepository
-    private lateinit var loginPresenter: LoginPresenter
+    private val loginPresenter by inject<LoginPresenter>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,10 +32,6 @@ class LoginFragment : Fragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        messageRepository = MessageRepository(ChatReferences())
-        authenticationRepository = AuthenticationRepository(FirebaseAuth.getInstance(), ChatReferences())
-
-        loginPresenter = LoginPresenter(authenticationRepository)
         loginPresenter.attachView(this)
 
         loginEmail.addTextChangedListener(InputTextListener(inputEmail))
