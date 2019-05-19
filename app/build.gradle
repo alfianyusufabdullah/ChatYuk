@@ -41,6 +41,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation "androidx.core:core-ktx:1.0.2"
+    implementation "org.koin:koin-androidx-scope:2.0.0-GA6"
 }
 
 repositories {
