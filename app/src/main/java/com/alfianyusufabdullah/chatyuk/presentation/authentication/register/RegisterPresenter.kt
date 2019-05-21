@@ -1,5 +1,6 @@
 package com.alfianyusufabdullah.chatyuk.presentation.authentication.register
 
+import android.view.View
 import com.alfianyusufabdullah.chatyuk.data.entity.User
 import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepository
 import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepositoryCallback
@@ -54,14 +55,17 @@ class RegisterPresenter(private val authenticationRepository: AuthenticationRepo
         }
 
         view?.onRegisterStart()
+        view?.onProgress(View.GONE)
 
         authenticationRepository.doRegister(user, object : AuthenticationRepositoryCallback {
             override fun onSuccess(user: User) {
                 view?.onRegisterSuccess(user)
+                view?.onProgress(View.VISIBLE)
             }
 
             override fun onFailed(error: String?) {
                 view?.onRegisterFailed(error)
+                view?.onProgress(View.VISIBLE)
             }
         })
     }

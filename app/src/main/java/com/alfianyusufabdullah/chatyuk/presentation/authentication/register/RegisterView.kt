@@ -11,6 +11,7 @@ interface RegisterView {
     fun onConfirmPasswordEmpty()
     fun onConfirmPasswordNotMatch()
     fun onRegisterStart()
+    fun onProgress(visibility: Int)
     fun onRegisterSuccess(user: User)
     fun onRegisterFailed(error: String?)
 }

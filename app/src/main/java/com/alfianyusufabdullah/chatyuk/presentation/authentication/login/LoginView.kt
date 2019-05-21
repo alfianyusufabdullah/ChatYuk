@@ -7,6 +7,7 @@ interface LoginView {
     fun onEmailInvalid()
     fun onPasswordEmpty()
     fun onLoginStart()
+    fun onProgress(visibility: Int)
     fun onLoginSuccess(user: User)
     fun onLoginFailed(error: String?)
 }

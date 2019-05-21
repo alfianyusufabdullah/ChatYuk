@@ -40,10 +40,9 @@ class LoginFragment : Fragment(), LoginView {
         txtSignUp.setOnClickListener { pageListener.onRegisterPage() }
         btnSignIn.setOnClickListener {
 
-            val user = User().apply {
-                email = loginEmail.text.toString().trim()
-                password = loginPass.text.toString().trim()
-            }
+            val user = User(
+                    email = loginEmail.text.toString().trim(),
+                    password = loginPass.text.toString().trim())
 
             loginPresenter.doLogin(user)
         }
@@ -76,6 +75,10 @@ class LoginFragment : Fragment(), LoginView {
         setInputTextEnabled(false)
     }
 
+    override fun onProgress(visibility: Int) {
+        loading.visibility = visibility
+    }
+
     override fun onLoginSuccess(user: User) {
         pageListener.onAuthenticateSuccess(user)
     }
@@ -90,8 +93,6 @@ class LoginFragment : Fragment(), LoginView {
     private fun setInputTextEnabled(state: Boolean) {
         inputEmail.isEnabled = state
         inputPass.isEnabled = state
-
-        loading.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     override fun onDetach() {

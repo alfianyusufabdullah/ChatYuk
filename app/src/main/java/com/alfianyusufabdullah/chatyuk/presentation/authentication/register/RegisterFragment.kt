@@ -43,12 +43,12 @@ class RegisterFragment : Fragment(), RegisterView {
         txtSignIn.setOnClickListener { pageListener.onLoginPage() }
         btnSignUp.setOnClickListener {
 
-            val user = User().apply {
-                username = regisUser.text.toString().trim()
-                email = regisEmail.text.toString().trim()
-                password = regisPass.text.toString().trim()
-                confirmPassword = regisPassConfirm.text.toString().trim()
-            }
+            val user = User(
+                    username = regisUser.text.toString().trim(),
+                    email = regisEmail.text.toString().trim(),
+                    password = regisPass.text.toString().trim(),
+                    confirmPassword = regisPassConfirm.text.toString().trim()
+            )
 
             registerPresenter.doRegister(user)
         }
@@ -101,6 +101,10 @@ class RegisterFragment : Fragment(), RegisterView {
         setInputTextEnabled(false)
     }
 
+    override fun onProgress(visibility: Int) {
+        loading.visibility = visibility
+    }
+
     override fun onRegisterSuccess(user: User) {
         pageListener.onAuthenticateSuccess(user)
     }
@@ -117,8 +121,6 @@ class RegisterFragment : Fragment(), RegisterView {
         inputEmail.isEnabled = state
         inputPass.isEnabled = state
         inputPassConfirm.isEnabled = state
-
-        loading.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     override fun onDetach() {
