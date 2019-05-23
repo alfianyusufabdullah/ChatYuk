@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Chat Yuk</string>
+    <string name="message_delete">Pesan telah dihapus</string>
 </resources>
