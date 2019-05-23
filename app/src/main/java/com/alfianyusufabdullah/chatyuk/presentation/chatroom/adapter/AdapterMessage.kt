@@ -15,7 +15,7 @@ import com.alfianyusufabdullah.chatyuk.preferences.ChatPreferences
  * @github @alfianyusufabdullah
  */
 
-class AdapterMessage(context: Context, private val listChat: List<Chat>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterMessage(context: Context, private val listChat: List<Chat>, private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val FROM = 1
@@ -45,8 +45,8 @@ class AdapterMessage(context: Context, private val listChat: List<Chat>) : Recyc
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HolderMesageFrom -> holder.bindChatContent(listChat[position])
-            is HolderMessageTo -> holder.bindChatContent(listChat[position])
+            is HolderMesageFrom -> holder.bindChatContent(listChat[position], onItemClickListener)
+            is HolderMessageTo -> holder.bindChatContent(listChat[position], onItemClickListener)
         }
     }
 
@@ -56,5 +56,9 @@ class AdapterMessage(context: Context, private val listChat: List<Chat>) : Recyc
 
     override fun getItemCount(): Int {
         return listChat.size
+    }
+
+    interface OnItemClickListener {
+        fun deleteMessage(chat: Chat)
     }
 }

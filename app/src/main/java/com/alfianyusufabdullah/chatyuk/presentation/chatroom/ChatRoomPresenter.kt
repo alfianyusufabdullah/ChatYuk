@@ -37,13 +37,28 @@ class ChatRoomPresenter(private val messageRepository: MessageRepository) {
             }
 
             override fun onMessageUpdate(position: Int, chat: Chat) {
-                view?.onMessageUpdate(position, chat)
+                if (position == 0) {
+                    view?.onMessageUpdate(position ,chat.copy(
+                            isSameUser = false
+                    ))
+                } else {
+                    val before = messages[chatPosition - 1].user
+                    view?.onMessageUpdate(position ,chat.copy(
+                            isSameUser = before == chat.user
+                    ))
+                }
             }
 
             override fun onMessageDeleted(position: Int) {
                 view?.onMessageDeleted(position)
+
+                chatPosition--
             }
         })
+    }
+
+    fun deleteMessage(chat: Chat){
+        messageRepository.deleteMessage(chat)
     }
 
     fun sendMessage(chat: Chat) {

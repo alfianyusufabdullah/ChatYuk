@@ -49,4 +49,10 @@ class MessageRepository(private val chatReferences: ChatReferences) {
                 .child(messageId ?: "0")
                 .setValue(chat.copy(messageId = messageId))
     }
+
+    fun deleteMessage(chat: Chat) {
+        chatReferences.chatReferences()
+                .child(chat.messageId ?: "")
+                .setValue(chat.copy(isDeleted = true))
+    }
 }

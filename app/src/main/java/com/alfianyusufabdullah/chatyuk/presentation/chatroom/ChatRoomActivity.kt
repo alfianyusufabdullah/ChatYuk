@@ -37,7 +37,11 @@ class ChatRoomActivity : AppCompatActivity(), ChatRoomView {
         setSupportActionBar(mainToolbar)
         etMessage.addTextChangedListener(EditTextListener(btnSend))
 
-        adapterMessage = AdapterMessage(this, listChat)
+        adapterMessage = AdapterMessage(this, listChat, object : AdapterMessage.OnItemClickListener {
+            override fun deleteMessage(chat: Chat) {
+                chatRoomPresenter.deleteMessage(chat)
+            }
+        })
 
         with(chat) {
             hasFixedSize()

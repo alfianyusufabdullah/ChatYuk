@@ -36,7 +36,7 @@ class AuthenticationRepository(private val authentication: FirebaseAuth, private
     fun doLogin(user: User, listener: AuthenticationRepositoryCallback) {
 
         authentication
-                .signInWithEmailAndPassword(user.email as String, user.confirmPassword as String)
+                .signInWithEmailAndPassword(user.email ?: "", user.confirmPassword ?: "")
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         val userId = it.result?.user?.uid

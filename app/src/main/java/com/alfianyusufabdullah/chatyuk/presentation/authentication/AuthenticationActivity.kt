@@ -10,6 +10,7 @@ import com.alfianyusufabdullah.chatyuk.presentation.authentication.login.LoginFr
 import com.alfianyusufabdullah.chatyuk.presentation.authentication.register.RegisterFragment
 import com.alfianyusufabdullah.chatyuk.presentation.chatroom.ChatRoomActivity
 import com.alfianyusufabdullah.chatyuk.replaceFragment
+import com.alfianyusufabdullah.chatyuk.startActivity
 
 class AuthenticationActivity : AppCompatActivity(), AuthenticationPageListener {
 
@@ -28,7 +29,7 @@ class AuthenticationActivity : AppCompatActivity(), AuthenticationPageListener {
 
     override fun onAuthenticateSuccess(user: User) {
         ChatPreferences.initPreferences(this).userInfo = user
-        startActivity(Intent(this@AuthenticationActivity, ChatRoomActivity::class.java))
+        startActivity<ChatRoomActivity>()
         finish()
     }
 }
