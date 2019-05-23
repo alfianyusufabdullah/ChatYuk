@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.alfianyusufabdullah.chatyuk.R
 import com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationActivity
 import com.alfianyusufabdullah.chatyuk.presentation.chatroom.ChatRoomActivity
+import com.alfianyusufabdullah.chatyuk.startActivity
 
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,9 +19,9 @@ class LauncherActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser != null) {
-            startActivity(Intent(this, ChatRoomActivity::class.java))
+            startActivity<ChatRoomActivity>()
         } else {
-            startActivity(Intent(this, AuthenticationActivity::class.java))
+            startActivity<AuthenticationActivity>()
         }
 
         finish()

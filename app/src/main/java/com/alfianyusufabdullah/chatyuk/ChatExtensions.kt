@@ -1,6 +1,7 @@
 package com.alfianyusufabdullah.chatyuk
 
 import android.content.Context
+import android.content.Intent
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -27,3 +28,10 @@ fun View.showSnackbar(message: String?) {
 }
 
 fun String.isEmailValid() = this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+inline fun <reified T : AppCompatActivity> AppCompatActivity.startActivity(
+        initializer: Intent.() -> Unit = {}
+) {
+    val intent = Intent(this, T::class.java).apply { initializer() }
+    startActivity(intent)
+}
