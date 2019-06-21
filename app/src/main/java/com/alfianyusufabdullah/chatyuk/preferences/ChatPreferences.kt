@@ -21,7 +21,6 @@ class ChatPreferences {
             user.username = preferences.getString(Constant.PREF_USERNAME, "")
             user.email = preferences.getString(Constant.PREF_EMAIL, "")
             user.userId = preferences.getString(Constant.PREF_USER_ID, "")
-            user.loginTime = preferences.getString(Constant.PREF_LOGIN_TIME, "")
             return user
         }
         set(modelUser) {
@@ -29,7 +28,6 @@ class ChatPreferences {
             editor.putString(Constant.PREF_USERNAME, modelUser.username)
             editor.putString(Constant.PREF_EMAIL, modelUser.email)
             editor.putString(Constant.PREF_USER_ID, modelUser.userId)
-            editor.putString(Constant.PREF_LOGIN_TIME, modelUser.loginTime)
             editor.apply()
         }
 

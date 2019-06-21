@@ -4,6 +4,9 @@ import com.alfianyusufabdullah.chatyuk.data.entity.User
 import com.alfianyusufabdullah.chatyuk.common.Constant
 import com.alfianyusufabdullah.chatyuk.data.route.ChatReferences
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class AuthenticationRepository(private val authentication: FirebaseAuth, private val chatReferences: ChatReferences) {
 
@@ -17,7 +20,6 @@ class AuthenticationRepository(private val authentication: FirebaseAuth, private
 
                         val newUser = user.copy(
                                 userId = userId,
-                                loginTime = Constant.time,
                                 password = null,
                                 confirmPassword = null
                         )
@@ -36,22 +38,24 @@ class AuthenticationRepository(private val authentication: FirebaseAuth, private
     fun doLogin(user: User, listener: AuthenticationRepositoryCallback) {
 
         authentication
-                .signInWithEmailAndPassword(user.email as String, user.confirmPassword as String)
+                .signInWithEmailAndPassword(user.email as String, user.password as String)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         val userId = it.result?.user?.uid
 
-                        val newUser = user.copy(
-                                userId = userId,
-                                loginTime = Constant.time,
-                                password = null
-                        )
-
                         chatReferences.userReferences()
                                 .child(userId ?: "0")
-                                .setValue(newUser)
+                                .addValueEventListener(object : ValueEventListener {
+                                    override fun onCancelled(p0: DatabaseError) {
 
-                        listener.onSuccess(newUser)
+                                    }
+
+                                    override fun onDataChange(p0: DataSnapshot) {
+                                        val newUser = p0.getValue(User::class.java) as User
+                                        listener.onSuccess(newUser)
+                                    }
+                                })
+
                     } else {
                         listener.onFailed(it.exception?.message)
                     }
