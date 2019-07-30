@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment
 import com.alfianyusufabdullah.chatyuk.R
 import com.alfianyusufabdullah.chatyuk.common.InputTextListener
 import com.alfianyusufabdullah.chatyuk.data.entity.User
-import com.alfianyusufabdullah.chatyuk.data.repository.authentication.AuthenticationRepository
-import com.alfianyusufabdullah.chatyuk.data.repository.database.MessageRepository
-import com.alfianyusufabdullah.chatyuk.data.route.ChatReferences
 import com.alfianyusufabdullah.chatyuk.hideSoftInput
 import com.alfianyusufabdullah.chatyuk.presentation.authentication.AuthenticationPageListener
 import com.alfianyusufabdullah.chatyuk.showSnackbar
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
 
